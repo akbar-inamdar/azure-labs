@@ -15,7 +15,7 @@ az group delete -n rg-day1cli --yes --no-wait
 
 ## What I learned (in my own words)
 - Resource group: Resource group is a folder or container which is used to store the related resources at a single group, like the vm, disk, network, etc in same group and I can delete the whole project by deleting the group
-- VNet and subnet: Vnet is a whole private virtual network while subnet is a part/slice of it, /16 means it fixes 16 bits and remaining 16 bits are free which gives 65536 addresses, Azure reserves 5 of them, so 65531 are usable and /24 means it fixes 24 bits and remaining 8 bits are free which gives 256 addresses, Azure reserves 5 of them, so 251 are usable
+- VNet and subnet: Vnet is a whole private virtual network while subnet is a part/slice of it, /16 means it fixes 16 bits and remaining 16 bits are free which gives 65536 addresses and /24 means it fixes 24 bits and remaining 8 bits are free which gives 256 addresses, Azure reserves 5 of them, so 251 are usable
 - NSG: A Network Security Group is a list of allow and deny rules that controls traffic to a VM. Rules are checked by priority, lowest number first, and the first match wins. Azure has a default rule (priority 65500) that denies all inbound internet traffic, so nginx only became reachable after I added an allow rule for port 80.
 ## Problems I hit and how I fixed them
 - Quota error on the VM size: I first picked Standard_B2ats_v2 because it was the free-tier size, but the portal said I had 0 vCPUs available for that VM family in Central India. I hadn't realised new subscriptions can start with zero quota for some sizes. I switched to Standard_B2ts_v2, which had quota, and the VM deployed fine. Next time I'll check the quota page (Quotas in the portal) before choosing a size.
